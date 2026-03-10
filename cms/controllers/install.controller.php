@@ -12,8 +12,8 @@ class InstallController
 
 		$infoDB = array(
 			"database" => getenv('DB_NAME') ?: "cms",
-			"user" => getenv('DB_USER') ?: "gbvazco",
-			"pass" => getenv('DB_PASS') ?: "EF305595"
+			"user" => getenv('DB_USER') ?: "user",
+			"pass" => getenv('DB_PASS') ?: "password"
 		);
 
 		return $infoDB;
@@ -29,7 +29,7 @@ class InstallController
 		try {
 
 			$link = new PDO(
-				"mysql:host=" . (getenv('DB_HOST') ?: "localhost") . ";dbname=" . InstallController::infoDatabase()["database"],
+				"mysql:host=" . (getenv('DB_HOST') ?: "db") . ";dbname=" . InstallController::infoDatabase()["database"],
 				InstallController::infoDatabase()["user"],
 				InstallController::infoDatabase()["pass"]
 			);
