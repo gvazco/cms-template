@@ -8,6 +8,16 @@ RUN apt-get update && apt-get install -y \
     unzip \
     && docker-php-ext-install pdo pdo_mysql zip
 
+# Enable Apache modules
+RUN a2enmod rewrite && a2enmod headers
+
+# Copy Apache configuration
+COPY apache.conf /etc/apache2/sites-available/000-default.conf
+RUN a2ensite 000-default
+
+# Copy PHP configuration
+COPY php.ini /usr/local/etc/php/conf.d/custom.ini
+
 # Set working directory
 WORKDIR /var/www/html
 
